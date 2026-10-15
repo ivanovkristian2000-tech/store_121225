@@ -657,3 +657,7 @@ def export_data():
                 quantity=quantity,
                 price=price
             )
+
+
+if __name__ == '__main__':
+    export_data()
