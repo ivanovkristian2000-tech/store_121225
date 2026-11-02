@@ -15,6 +15,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     filterset_fields = ['category', "price"]
 
+
 class ProductListCreateView(ListCreateAPIView):
     """Возвращает список записей товара по GET и создаёт запись по POST."""
     queryset = Product.objects.all()
@@ -28,6 +29,7 @@ class ProductListCreateView(ListCreateAPIView):
         if self.request.method == 'GET':
             return ProductSerializer
         return ProductCreateUpdateSerializer
+
 
 class ProductRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     """Получает запись товара по GET, изменяет по PUT/PATCH и удаляет по DELETE."""
@@ -43,6 +45,7 @@ class ProductRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
             return ProductSerializer
         return ProductCreateUpdateSerializer
 
+
 class  ProductDetailListCreateView(ListCreateAPIView):
     """Возвращает список записей характеристик товара по GET и создаёт запись по POST."""
     queryset = ProductDetail.objects.all()
@@ -56,6 +59,7 @@ class  ProductDetailListCreateView(ListCreateAPIView):
         if self.request.method == 'GET':
             return ProductDetailSerializer
         return ProductCreateUpdateSerializer
+
 
 class ProductDetailRetrieveUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     """Получает запись характеристик товара по GET, изменяет по PUT/PATCH и удаляет по DELETE."""
