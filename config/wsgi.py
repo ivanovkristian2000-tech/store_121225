@@ -1,10 +1,6 @@
-"""
-WSGI config for config project.
+"""Точка входа для WSGI-сервера.
 
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/6.0/howto/deployment/wsgi/
+Выбирает config.settings и предоставляет объект application для обработки запросов.
 """
 
 import os
