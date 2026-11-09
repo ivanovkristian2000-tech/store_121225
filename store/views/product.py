@@ -1,47 +1,84 @@
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, RetrieveUpdateDestroyAPIView
+"""API-представления товаров и характеристик с выбором сериализатора по HTTP-методу."""
+from rest_framework import viewsets
 from store.models import Product, ProductDetail
-from store.serializers.product import (ProductSerializer, ProductCreateUpdateSerializer, ProductDetailSerializer,
-                                       ProductDetailCreateUpdateSerializer)
 from rest_framework.authentication import BasicAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from store.serializers.product import (ProductSerializer, ProductCreateUpdateSerializer
+                                        , ProductDetailSerializer, ProductDetailCreateUpdateSerializer)
 
 
-class ProductListCreateViewSet(ListCreateAPIView):
+class ProductViewSet(viewsets.ModelViewSet):
+    """Предоставляет список, получение, создание, изменение и удаление товара через API.
+
+    Поддерживает фильтрацию по категории и цене.
+    """
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filterset_fields = ['category', "price"]
+
+
+class ProductListCreateView(ListCreateAPIView):
+    """Возвращает список записей товара по GET и создаёт запись по POST."""
     queryset = Product.objects.all()
     authentication_classes = [TokenAuthentication] #[BasicAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
+        """Выбирает класс сериализатора по HTTP-методу запроса.
+
+        Для GET возвращает ProductSerializer;
+        для остальных методов — ProductCreateUpdateSerializer.
+        """
         if self.request.method == 'GET':
             return ProductSerializer
         return ProductCreateUpdateSerializer
 
 
-class ProductRetrieveUpdateDestroyAPIViewSet(RetrieveUpdateDestroyAPIView):
+
+class ProductRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    """Получает запись товара по GET, изменяет по PUT/PATCH и удаляет по DELETE."""
     queryset = Product.objects.all()
 
-
     def get_serializer_class(self):
+        """Выбирает класс сериализатора по HTTP-методу запроса.
+
+        Для GET возвращает ProductSerializer;
+        для остальных методов — ProductCreateUpdateSerializer.
+        """
         if self.request.method == 'GET':
             return ProductSerializer
         return ProductCreateUpdateSerializer
 
 
-class ProductDetailListCreateViewSet(ListCreateAPIView):
-    queryset = Product.objects.all()
+class  ProductDetailListCreateView(ListCreateAPIView):
+    """Возвращает список записей характеристик товара по GET и создаёт запись по POST."""
+    queryset = ProductDetail.objects.all()
 
     def get_serializer_class(self):
+        """Выбирает класс сериализатора по HTTP-методу запроса.
+
+        Для GET возвращает ProductDetailSerializer;
+        для остальных методов — ProductCreateUpdateSerializer.
+        """
         if self.request.method == 'GET':
             return ProductDetailSerializer
-        return ProductDetailCreateUpdateSerializer
+        return ProductCreateUpdateSerializer
 
 
 class ProductDetailRetrieveUpdateDeleteView(RetrieveUpdateDestroyAPIView):
-    queryset = Product.objects.all()
+    """Получает запись характеристик товара по GET, изменяет по PUT/PATCH и удаляет по DELETE."""
+    queryset = ProductDetail.objects.all()
 
     def get_serializer_class(self):
+        """Выбирает класс сериализатора по HTTP-методу запроса.
+
+        Для GET возвращает ProductDetailSerializer;
+        для остальных методов — ProductDetailCreateUpdateSerializer.
+        """
         if self.request.method == 'GET':
             return ProductDetailSerializer
         return ProductDetailCreateUpdateSerializer
+
 
 

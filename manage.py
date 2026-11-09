@@ -1,11 +1,15 @@
 #!/usr/bin/env python
-"""Django's command-line utility for administrative tasks."""
+"""Запуск административных команд Django с настройками config.settings."""
 import os
 import sys
 
 
 def main():
-    """Run administrative tasks."""
+    """Настраивает Django и выполняет команду из аргументов командной строки.
+
+    Raises:
+        ImportError: Если Django недоступен в текущем окружении Python.
+    """
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
     try:
         from django.core.management import execute_from_command_line
