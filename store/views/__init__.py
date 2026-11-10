@@ -6,11 +6,12 @@ from .product import (ProductListCreateView
                     , ProductDetailRetrieveUpdateDeleteView
                     , ProductDetailListCreateView
                     , ProductViewSet
-                    , ProductRetrieveUpdateDestroyAPIViewSet
-                    , ProductListCreateViewSet
-                    , ProductDetailListCreateViewSet)
+                    , ProductRetrieveUpdateDestroyAPIView
+                    , ProductListCreateView
+                    , ProductDetailListCreateView)
 
 from .address import  AddressViewSet
+from .supplier import SupplierViewSet
 
 from .customer import (CustomerListCreateView
                         , CustomerDetailUpdateDeleteView
