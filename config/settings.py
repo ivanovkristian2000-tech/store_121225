@@ -31,6 +31,7 @@ INSTALLED_APPS = [
 
     'store.apps.StoreConfig',
     'rest_framework',
+    'drf_yasg',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'django_filters',
