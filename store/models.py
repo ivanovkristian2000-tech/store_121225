@@ -1,6 +1,8 @@
 """Модели базы данных магазина и связи между товарами, клиентами и заказами."""
 from django.db import models
 
+from store.permission import IsCustomerOrReadOnly
+
 
 class Category(models.Model):
     """Категория с уникальным названием для группировки товаров."""
@@ -133,6 +135,9 @@ class Order(models.Model):
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
         ordering = ['-order_date']
+        permissions = [
+            ("can_view_statistics", "Can view statistics"),
+        ]
 
     def __str__(self):
         """Возвращает номер заказа и клиента для отображения объекта."""

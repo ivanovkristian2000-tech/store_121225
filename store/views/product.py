@@ -3,7 +3,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateAPIView, Re
 from rest_framework import viewsets
 from store.models import Product, ProductDetail
 from rest_framework.authentication import BasicAuthentication, TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from store.serializers.product import (ProductSerializer, ProductCreateUpdateSerializer
                                         , ProductDetailSerializer, ProductDetailCreateUpdateSerializer)
 
@@ -69,6 +69,7 @@ class  ProductDetailListCreateView(ListCreateAPIView):
 class ProductDetailRetrieveUpdateDeleteView(RetrieveUpdateDestroyAPIView):
     """Получает запись характеристик товара по GET, изменяет по PUT/PATCH и удаляет по DELETE."""
     queryset = ProductDetail.objects.all()
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_serializer_class(self):
         """Выбирает класс сериализатора по HTTP-методу запроса.

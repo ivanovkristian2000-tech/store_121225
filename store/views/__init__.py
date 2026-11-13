@@ -19,5 +19,9 @@ from .customer import (CustomerListCreateView
                         , OrderListCreateView
                         , OrderItemDetailUpdateDeleteView
                         , OrderItemListCreateView
-                        , CustomerViewSet)
+                        , CustomerViewSet
+                        , UserOrderListView
+                        , OrderStatisticsView
+
+                       )
 

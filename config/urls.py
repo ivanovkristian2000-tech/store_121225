@@ -51,4 +51,7 @@ urlpatterns = [
     path('api-token-auth/', obtain_auth_token, name='api-token-auth'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
     path('token/', TokenObtainPairView.as_view(), name='token'),
+    path('user-orders/', views.UserOrderListView.as_view(), name='user-order'),
+    path('orders/', views.OrderListCreateView.as_view(), name='orders'),
+    path('order-statistics/', views.OrderStatisticsView.as_view(), name='order-statistics'),
 ]
